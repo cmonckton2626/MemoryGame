@@ -12,36 +12,50 @@ const restart = $("#restart");
 const openModal1 = $("#open-modal1");
 const cardContainer = $("#card-container")
 const cardList = document.querySelectorAll(".cards");
-const flippedCardList = document.querySelectorAll(".cards.flip");
 const timerEl = document.getElementById("timer");
 const stats = {
     wins: 0,
-    losse: 0,
+    losses: 0,
 };
 let hasFlippedCard = false;
 let firstCard, secondCard;
 let lockBoard = false;
-let timeLeft = 200;
+let flipCardList = 0;
+let timerRunning = false;
 
 openModal1.addEventListener("click", () => modal1.style.display = "flex");
 closeModal1.addEventListener("click", () => modal1.style.display = "none");
 closeModal1.addEventListener("click", startTimer);
-
-
-
+cardList.forEach(card => card.addEventListener("click", flipCard));
+restart.addEventListener("click", resetGame);
+restart.addEventListener("click", startTimer)
 
 function startTimer() {
+    let timeLeft = 60;
     const countdown = setInterval(() => {
-        timerEl.textContent = `${timeLeft} seconds left`
+        
+        timerEl.textContent = `${timeLeft}`
         timeLeft--
+        if (checkAllCardsFlipped() === true) {
+            clearInterval(countdown);
+        }
         if (timeLeft < 0) {
             clearInterval(countdown);
             timerEl.textContent = `Time\'s up!`;
+            timerEl.textContent[1] = null
             lockBoard = true;
-            checkTimeLeft();
-        }
-    }, 800)
+            if (timeLeft < 0) {
+                cardContainer.style.display = "none";
+                resultScreen.style.display = "flex";
+                stats.losses++;
+                losses.children[1].innerText = stats.losses;
+                resultScreen.children[0].textContent = "🐓 OH NO! You ran out of time 🐕"
+                resultScreen.children[1].textContent = "😿 You didn't win this time 🐎"
+                }
+            }
+        }, 1000);
 }
+    
 
 
 function flipCard() {
@@ -61,11 +75,12 @@ function flipCard() {
 }
 function checkForMatch () {
     if (firstCard.dataset.framework === secondCard.dataset.framework) {
+        flipCardList+=2
         disableCards();
     } else {
         unflipCards();
     } 
-    checkForWinner();  
+    setTimeout(checkForWinner, 2000);  
 }
 
 function disableCards() {
@@ -83,6 +98,12 @@ function unflipCards() {
     }, 800); 
 }
 
+function unflipAllCards() {
+    cardList.forEach(card => {
+        card.classList.remove("flip");
+    });
+}
+
 function resetBoard () {
     hasFlippedCard = false;
     lockBoard = false;
@@ -90,39 +111,42 @@ function resetBoard () {
     secondCard = null;
 }
 
-(function shuffle() {
+function shuffle() {
     cardList.forEach(card => {
         let randomNum = Math.floor(Math.random() * 12); 
         card.style.order = randomNum
     });
 }
-)();
+shuffle();
 
-function checkAllCardsFlipped () {
-    return flippedCardList.length === cardList.length
-    console.log("all the cards are flipped")
+function checkAllCardsFlipped (event) {
+    if (flipCardList === cardList.length) {
+        timerEl.textContent = `Time\'s up!`
+        return true;
+    } else {
+        return false
+    }
 }
 
 function checkForWinner () {
     if (checkAllCardsFlipped()) {
-        // cardContainer.style.display = "none"
-        resultScreen.style.display = "flex"
-        console.log("you won")
+        cardContainer.style.display = "none";
+        resultScreen.style.display = "flex";
+        stats.wins++;
+        wins.children[1].innerText = stats.wins;
+        resultScreen.children[0].textContent = "🎉 CONGRATULATIONS 🎉"
+        resultScreen.children[1].textContent = "🏆 You're a winner! 🏆"
     } 
 }
+   
 
-function checkTimeLeft () {
-    if (timeLeft < 0) {
-        // cardContainer.style.display = "none"
-        resultScreen.style.display = "flex"
-        console.log("time ran out")
-        }
-    }
-
-
-cardList.forEach(card => card.addEventListener("click", flipCard))
-
-
+function resetGame () {
+    unflipAllCards();
+    shuffle();
+    resetBoard();
+    cardContainer.style.display = "flex";
+    resultScreen.style.display = "none";
+}
 
 
 
