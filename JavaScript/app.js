@@ -21,24 +21,39 @@ let hasFlippedCard = false;
 let firstCard, secondCard;
 let lockBoard = false;
 let flipCardList = 0;
-let timerRunning = false;
 
-openModal1.addEventListener("click", () => modal1.style.display = "flex");
+
+openModal1.addEventListener("click", openModal)
 closeModal1.addEventListener("click", () => modal1.style.display = "none");
 closeModal1.addEventListener("click", startTimer);
 cardList.forEach(card => card.addEventListener("click", flipCard));
-restart.addEventListener("click", resetGame);
-restart.addEventListener("click", startTimer)
+restart.addEventListener("click", () => {
+    resetGame();
+    startTimer();
+});
+
+
+function openModal() {
+    modal1.style.display = "flex";
+    flipCardList = 0;
+    closeModal1.removeEventListener("click", startTimer)
+}
 
 function startTimer() {
-    let timeLeft = 60;
+    let timeLeft = 30;
     const countdown = setInterval(() => {
-        
         timerEl.textContent = `${timeLeft}`
         timeLeft--
-        if (checkAllCardsFlipped() === true) {
+        if (flipCardList === cardList.length) {
             clearInterval(countdown);
-        }
+            timerEl.textContent = `Time\'s up!`;
+            cardContainer.style.display = "none";
+            resultScreen.style.display = "flex";
+            stats.wins++;
+            wins.children[1].innerText = stats.wins;
+            resultScreen.children[0].textContent = "😸 CONGRATULATIONS 😹"
+            resultScreen.children[1].textContent = "🏆 You're a winner! 🐮"
+        }      
         if (timeLeft < 0) {
             clearInterval(countdown);
             timerEl.textContent = `Time\'s up!`;
@@ -51,9 +66,9 @@ function startTimer() {
                 losses.children[1].innerText = stats.losses;
                 resultScreen.children[0].textContent = "🐓 OH NO! You ran out of time 🐕"
                 resultScreen.children[1].textContent = "😿 You didn't win this time 🐎"
-                }
             }
-        }, 1000);
+        }
+    }, 1000);
 }
     
 
@@ -80,7 +95,7 @@ function checkForMatch () {
     } else {
         unflipCards();
     } 
-    setTimeout(checkForWinner, 2000);  
+    // checkForWinner();  
 }
 
 function disableCards() {
@@ -105,45 +120,27 @@ function unflipAllCards() {
 }
 
 function resetBoard () {
+    
     hasFlippedCard = false;
     lockBoard = false;
     firstCard = null;
     secondCard = null;
+    flipCardList = 0;
 }
 
 function shuffle() {
     cardList.forEach(card => {
-        let randomNum = Math.floor(Math.random() * 12); 
+        let randomNum = Math.floor(Math.random() * 16); 
         card.style.order = randomNum
     });
 }
 shuffle();
 
-function checkAllCardsFlipped (event) {
-    if (flipCardList === cardList.length) {
-        timerEl.textContent = `Time\'s up!`
-        return true;
-    } else {
-        return false
-    }
-}
-
-function checkForWinner () {
-    if (checkAllCardsFlipped()) {
-        cardContainer.style.display = "none";
-        resultScreen.style.display = "flex";
-        stats.wins++;
-        wins.children[1].innerText = stats.wins;
-        resultScreen.children[0].textContent = "🎉 CONGRATULATIONS 🎉"
-        resultScreen.children[1].textContent = "🏆 You're a winner! 🏆"
-    } 
-}
-   
-
 function resetGame () {
-    unflipAllCards();
-    shuffle();
+    cardList.forEach(card => card.addEventListener("click", flipCard));
     resetBoard();
+    shuffle();
+    unflipAllCards();
     cardContainer.style.display = "flex";
     resultScreen.style.display = "none";
 }
