@@ -1,0 +1,97 @@
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-color: rgb(120, 120, 130);
+    
+}
+
+#modal1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    z-index: 1;
+}
+
+.modal1-content {
+    max-width: 80%;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 10px red double;
+    padding: 10px;
+    margin: 15px 15vw;
+}
+
+.gameboard {
+    justify-content: center;
+    margin: 10vh 0;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 0px;
+}
+
+.card-row {
+    display: flex;
+}
+
+.cards {
+    border: 2px solid black;
+    height: 15vw;
+    min-height: 10px;
+    width: 10vw;
+    min-width: 6px;
+    position: relative;
+    margin: .5vw;
+    border-radius: .75vw;
+    overflow: hidden;
+    transition: all .5s ease;
+    
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+    }
+    &:active {
+        transform: scale(.95);
+    }
+}
+
+.cards.flip {
+    transform: rotateY(180deg);
+    transition: all .3s ease;
+}
+
+.front-of-card, .back-of-card {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    
+}
+
+.flip .back-of-card {
+    animation: reveal-card 0s ease-in-out 100ms forwards;
+}
+
+@keyframes reveal-card {
+    from {display: block}
+    to {display: none}
+}
+
+.result-message {
+    display: none;
+}
+

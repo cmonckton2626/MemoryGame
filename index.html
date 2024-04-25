@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Meld</title>
+    <link href="https://em-content.zobj.net/source/joypixels/369/exploding-head_1f92f.png" rel="icon">
+    <link href="./style.css" rel="stylesheet">
+    <script src="./app.js" defer></script>
+</head>
+<body>
+    <div id="modal1">
+        <div class="modal1-content">
+            <h1>Memory Meld</h1>
+            <h2>
+                Welcome to this cerebral challenge, mind matrix, cognitive clash: Memory Meld! Your memory will be tested as you try to match as many cards as you can before time ticks down to zero!
+            </h2>
+            <h3>Game Tip:</h3>
+            <p>There are 16 cards; 8 pairs of 2 matching cards you must find. </p>
+            <button id="close-modal1">Play</button>
+        </div>
+    </div>
+
+    <section class="gameboard">
+        <header>
+            <div class="header-content">
+                <h1 class="wins">Wins 0</h1>
+                <div id="timer" class="timer">30 seconds left</div>
+                <h1 class="losses">Losses 0</h1>
+            </div>
+        </header>
+        <ul class="card-container">
+            <div class="card-row">
+                <div id="card1" class="cards" data-framework="bunny">
+                    <img class="front-of-card" src="https://i.imgur.com/AeywoM1.jpeg" alt="front-of-card" />
+                    <img class="back-of-card" src="https://i.imgur.com/WrxV5AZ.jpeg" alt="Playing Card Back" />
+                </div>
+                <div id="card2" class="cards" data-framework="bunny">
+                    <img class="front-of-card" src="https://i.imgur.com/AeywoM1.jpeg" alt="front-of-card"/>
+                    <img class="back-of-card" src="https://i.imgur.com/WrxV5AZ.jpeg" alt="Playing Card Back"/>
+                </div>
+                <div id="card3" class="cards" data-framework="cat">
+                    <img class="front-of-card" src="https://i.imgur.com/QpAsfwl.jpeg" alt="front-of-card"/>
+                    <img class="back-of-card" src="https://i.imgur.com/WrxV5AZ.jpeg" alt="Playing Card Back"/>
+                </div>
+                <div id="card4" class="cards" data-framework="cat">
+                    <img class="front-of-card" src="https://i.imgur.com/QpAsfwl.jpeg" alt="front-of-card"/>
+                    <img class="back-of-card" src="https://i.imgur.com/WrxV5AZ.jpeg" alt="Playing Card Back"/>
+                </div>
+                <div id="card5" class="cards" data-framework="chicken">
+                    <img class="front-of-card" src="https://i.imgur.com/6GxLi8q.jpeg" alt="front-of-card"/>
+                    <img class="back-of-card" src="https://i.imgur.com/WrxV5AZ.jpeg" alt="Playing Card Back"/>
+                </div>
+                <div id="card6" class="cards" data-framework="chicken">
+                    <img class="front-of-card" src="https://i.imgur.com/6GxLi8q.jpeg" alt="front-of-card"/>
+                    <img class="back-of-card" src="https://i.imgur.com/WrxV5AZ.jpeg" alt="Playing Card Back"/>
+                </div>
+                <div id="card7" class="cards" data-framework="cow">
+                    <img class="front-of-card" src="https://i.imgur.com/BtrPd8M.jpeg" alt="front-of-card"/>
+                    <img class="back-of-card" src="https://i.imgur.com/WrxV5AZ.jpeg" alt="Playing Card Back"/>
+                </div>
+                <div id="card8" class="cards" data-framework="cow">
+                    <img class="front-of-card" src="https://i.imgur.com/BtrPd8M.jpeg" alt="front-of-card"/>
+                    <img class="back-of-card" src="https://i.imgur.com/WrxV5AZ.jpeg" alt="Playing Card Back"/>
+                </div>
+            </div>
+            <div class="card-row">
+                <div id="card9" class="cards" data-framework="dog">
+                    <img class="front-of-card" src="https://i.imgur.com/3hmIJC2.jpeg" alt="front-of-card"/>
+                    <img class="back-of-card" src="https://i.imgur.com/WrxV5AZ.jpeg" alt="Playing Card Back"/>
+                </div>
+                <div id="card10" class="cards" data-framework="dog">
+                    <img class="front-of-card" src="https://i.imgur.com/3hmIJC2.jpeg" alt="front-of-card"/>
+                    <img class="back-of-card" src="https://i.imgur.com/WrxV5AZ.jpeg" alt="Playing Card Back"/>
+                </div>
+                <div id="card11" class="cards" data-framework="horse">
+                    <img class="front-of-card" src="https://i.imgur.com/onYZArA.jpeg" alt="front-of-card"/>
+                    <img class="back-of-card" src="https://i.imgur.com/WrxV5AZ.jpeg" alt="Playing Card Back"/>
+                </div>
+                <div id="card12" class="cards" data-framework="horse">
+                    <img class="front-of-card" src="https://i.imgur.com/onYZArA.jpeg" alt="front-of-card"/>
+                    <img class="back-of-card" src="https://i.imgur.com/WrxV5AZ.jpeg" alt="Playing Card Back"/>
+                </div>
+                <div id="card13" class="cards" data-framework="pig">
+                    <img class="front-of-card" src="https://i.imgur.com/HqXtdsW.jpeg" alt="front-of-card"/>
+                    <img class="back-of-card" src="https://i.imgur.com/WrxV5AZ.jpeg" alt="Playing Card Back"/>
+                </div>
+                <div id="card14" class="cards" data-framework="pig">
+                    <img class="front-of-card" src="https://i.imgur.com/HqXtdsW.jpeg" alt="front-of-card"/>
+                    <img class="back-of-card" src="https://i.imgur.com/WrxV5AZ.jpeg" alt="Playing Card Back"/>
+                </div>
+                <div id="card15" class="cards" data-framework="sheep">
+                    <img class="front-of-card" src="https://i.imgur.com/bkFit53.jpeg" alt="front-of-card"/>
+                    <img class="back-of-card" src="https://i.imgur.com/WrxV5AZ.jpeg" alt="Playing Card Back"/>
+                </div>
+                <div id="card16" class="cards" data-framework="sheep">
+                    <img class="front-of-card" src="https://i.imgur.com/bkFit53.jpeg" alt="front-of-card"/>
+                    <img class="back-of-card" src="https://i.imgur.com/WrxV5AZ.jpeg" alt="Playing Card Back"/>
+                </div>
+            </div>
+        </ul>
+    </section>
+
+
+    <section id="results">
+        <div class="result-message">
+            <h1>🎉 CONGRATULATIONS 🎉</h1>
+            <h2>🏆 You're a winner! 🏆</h2>
+            <h3>Would you like to play again?</h3>
+            <button id="restart">Play</button>
+        </div>
+    </section>
+
+    <footer>
+        <button id="open-modal1">Rules</button>
+    </footer>
+    
+</body>
+</html>
