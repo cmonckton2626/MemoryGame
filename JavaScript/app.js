@@ -40,7 +40,7 @@ function openModal() {
 }
 
 function startTimer() {
-    let timeLeft = 30;
+    let timeLeft = 60;
     const countdown = setInterval(() => {
         timerEl.textContent = `${timeLeft}`
         timeLeft--
