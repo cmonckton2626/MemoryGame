@@ -29,6 +29,10 @@ body {
 .modal1-content {
     max-width: 60%;
     font-size: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .gameboard {
