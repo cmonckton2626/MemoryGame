@@ -42,31 +42,32 @@ function openModal() {
 function startTimer() {
     let timeLeft = 60;
     const countdown = setInterval(() => {
-        timerEl.textContent = `${timeLeft}`
+        timerEl.children[0].textContent = `${timeLeft}`
+        timerEl.children[1].textContent = "seconds left"
         timeLeft--
         if (flipCardList === cardList.length) {
             clearInterval(countdown);
-            timerEl.textContent = `Time\'s up!`;
+            timerEl.children[0].innerHTML = `Time\'s up!`;
+            timerEl.children[1].innerHTML = "";
             cardContainer.style.display = "none";
             resultScreen.style.display = "flex";
             stats.wins++;
             wins.children[1].innerText = stats.wins;
             resultScreen.children[0].textContent = "😸 CONGRATULATIONS 😹"
             resultScreen.children[1].textContent = "🏆 You're a winner! 🐮"
-        }      
+        }       
         if (timeLeft < 0) {
             clearInterval(countdown);
-            timerEl.textContent = `Time\'s up!`;
-            timerEl.textContent[1] = null
-            lockBoard = true;
-            if (timeLeft < 0) {
-                cardContainer.style.display = "none";
-                resultScreen.style.display = "flex";
-                stats.losses++;
-                losses.children[1].innerText = stats.losses;
-                resultScreen.children[0].textContent = "🐓 OH NO! You ran out of time 🐕"
-                resultScreen.children[1].textContent = "😿 You didn't win this time 🐎"
-            }
+            timerEl.children[0].innerHTML = `Time\'s up!`;
+            timerEl.children[1].innerHTML = "";
+            lockBoard=true;                              
+            cardContainer.style.display = "none";
+            resultScreen.style.display = "flex";
+            stats.losses++;
+            losses.children[1].innerText = stats.losses;
+            resultScreen.children[0].textContent = "🐓 OH NO! You ran out of time 🐕"
+            resultScreen.children[1].textContent = "😿 You didn't win this time 🐎"
+            
         }
     }, 1000);
 }
