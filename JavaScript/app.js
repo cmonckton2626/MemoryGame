@@ -92,6 +92,8 @@ function checkForMatch () {
     if (firstCard.dataset.framework === secondCard.dataset.framework) {
         flipCardList+=2
         disableCards();
+        console.log(flipCardList)
+
     } else {
         unflipCards();
     } 
@@ -125,7 +127,6 @@ function resetBoard () {
     lockBoard = false;
     firstCard = null;
     secondCard = null;
-    flipCardList = 0;
 }
 
 function shuffle() {
@@ -141,6 +142,7 @@ function resetGame () {
     resetBoard();
     shuffle();
     unflipAllCards();
+    flipCardList = 0;
     cardContainer.style.display = "flex";
     resultScreen.style.display = "none";
 }
